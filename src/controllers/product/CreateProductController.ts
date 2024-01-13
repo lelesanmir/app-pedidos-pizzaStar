@@ -2,6 +2,8 @@ import { Request, Response} from 'express'
 
 import { CreateProductService } from '../../services/product/CreateProductService'
 
+
+
 class CreateProductController{
     async handle(req: Request, res: Response){
         const {name, price, description, category_id} = req.body;
@@ -12,15 +14,14 @@ class CreateProductController{
             throw new Error("error upload file")
         }else{
 
-            const { originalname, filename} = req.file;
+            const { originalname, filename: banner} = req.file;
 
-            console.log( filename)
 
             const product =await createProductService.execute({
                 name,
                 price,
                 description,
-                banner: '',
+                banner,
                 category_id
             });
     
